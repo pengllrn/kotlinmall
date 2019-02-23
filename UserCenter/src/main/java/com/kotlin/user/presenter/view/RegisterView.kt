@@ -9,5 +9,6 @@ import com.kotlin.base.presenter.view.BaseView
  * https://github.com/pengllrn
  */
 interface RegisterView:BaseView {
-
+    //    回调
+    fun onRegisterResult(result:Boolean)
 }
