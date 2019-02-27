@@ -5,6 +5,7 @@ import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.user.presenter.view.RegisterView
 import com.kotlin.user.service.impl.UserServiceImpl
+import javax.inject.Inject
 
 /**
  * Author：Pengllrn
@@ -12,7 +13,10 @@ import com.kotlin.user.service.impl.UserServiceImpl
  * Contact 897198177@qq.com
  * https://github.com/pengllrn
  */
-class RegisterPresenter:BasePresenter<RegisterView>() {
+class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
+
+    @Inject
+    lateinit var userService:UserServiceImpl
 
     fun register(mobile:String,verifyCode:String,pwd:String){
         /*
@@ -20,7 +24,7 @@ class RegisterPresenter:BasePresenter<RegisterView>() {
          */
         //回调
         //mView为RegisterView类型（泛型参数）的，所以能够使用RegisterView的方法
-        val userService = UserServiceImpl()
+//        val userService = UserServiceImpl()
         userService.register(mobile,verifyCode,pwd)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(Schedulers.io())
