@@ -3,6 +3,7 @@ package com.kotlin.user.ui.activity
 import android.os.Bundle
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.user.R
+import com.kotlin.user.injection.component.DaggerUserComponent
 import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.presenter.RegisterPresenter
 import com.kotlin.user.presenter.view.RegisterView
@@ -17,11 +18,9 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
 //        mPresenter=RegisterPresenter()
-//        mPresenter.mView=this
-        initInjection()
 
+        initInjection()
         mRegisterBtn.setOnClickListener {
             mPresenter.register(mMobileEt.text.toString(),
                     mVerifyCodeEt.text.toString(),mPwdEt.text.toString())
@@ -30,7 +29,8 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView {
     }
 
     private fun initInjection() {
-        //
-        DaggerUserComponent.builder().userModule(UserModule).build()
+        DaggerUserComponent.builder().userModule(UserModule()).build().inject(this)
+        mPresenter.mView=this
+
     }
 }

@@ -48,4 +48,5 @@ dependencies {
     //Dagger 2
     api "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
 }
