@@ -10,5 +10,5 @@ import com.kotlin.base.presenter.view.BaseView
  */
 interface RegisterView:BaseView {
     //    回调
-    fun onRegisterResult(result:Boolean)
+    fun onRegisterResult(result:String)
 }

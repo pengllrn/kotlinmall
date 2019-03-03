@@ -10,8 +10,6 @@ import javax.inject.Inject
 /**
  * Author：Pengllrn
  * Date: 2019/2/23
- * Contact 897198177@qq.com
- * https://github.com/pengllrn
  */
 class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
 
@@ -35,9 +33,9 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
 //                })
                 .excute(object :BaseSubscriber<Boolean>(){
                     override fun onNext(t: Boolean) {
-                        mView.onRegisterResult(t)
+                        if(t) mView.onRegisterResult("注册成功")
                     }
-                })
+                },lifecyProvider)
 
     }
 }

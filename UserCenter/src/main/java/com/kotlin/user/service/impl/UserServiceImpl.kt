@@ -1,11 +1,9 @@
 package com.kotlin.user.service.impl
 
-import com.kotlin.base.data.protocal.BaseResponse
-import com.kotlin.base.rx.BaseException
+import com.kotlin.base.rx.BaseFuncBoolean
 import com.kotlin.user.data.repository.UserRepository
 import com.kotlin.user.service.UserService
 import rx.Observable
-import rx.functions.Func1
 import javax.inject.Inject
 
 /**
@@ -22,13 +20,6 @@ class UserServiceImpl @Inject constructor():UserService{
 
         //返回值与repository对应方法的返回值有些不一样，需要通过flatMap进行数据转换
         return repository.register(mobile,pwd,verifyCode)
-                .flatMap(object :Func1<BaseResponse<String>,Observable<Boolean>>{
-                    override fun call(t: BaseResponse<String>): Observable<Boolean> {
-                        if (t.status != 0){
-                            return Observable.error(BaseException(t.status,t.message))
-                        }
-                        return Observable.just(true)
-                    }
-                })
+                .flatMap(BaseFuncBoolean())
     }
 }

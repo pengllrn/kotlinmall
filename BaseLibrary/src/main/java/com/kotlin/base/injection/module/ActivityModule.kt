@@ -1,9 +1,9 @@
 package com.kotlin.base.injection.module
 
 import android.app.Activity
+import com.kotlin.base.injection.ActivityScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * Author：Pengllrn
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class ActivityModule(private val activity: Activity) {
 
     @Provides
-    @Singleton
+    @ActivityScope
     fun providesActivity():Activity{
         return activity
     }
