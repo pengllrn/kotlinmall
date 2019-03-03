@@ -8,10 +8,9 @@ import rx.Observable
 import javax.inject.Inject
 
 /**
+ * 仓库：直接用来访问网络，数据层的最终封装。
  * Author：Pengllrn
  * Date: 2019/2/25
- * Contact 897198177@qq.com
- * https://github.com/pengllrn
  */
 class UserRepository @Inject constructor(){
     fun register(mobile:String,pwd:String,verifyCode:String)

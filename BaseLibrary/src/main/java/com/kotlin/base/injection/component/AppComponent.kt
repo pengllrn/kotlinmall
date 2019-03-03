@@ -1,11 +1,17 @@
 package com.kotlin.base.injection.component
 
+import android.content.Context
+import com.kotlin.base.injection.module.AppModule
 import dagger.Component
+import javax.inject.Singleton
 
 /**
  * Author：Pengllrn
  * Date: 2019/3/1
  */
-@Component
+@Singleton
+@Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
+
+    fun context():Context
 }
