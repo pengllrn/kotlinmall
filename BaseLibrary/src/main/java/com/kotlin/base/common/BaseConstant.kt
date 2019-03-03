@@ -8,6 +8,6 @@ package com.kotlin.base.common
  */
 class BaseConstant {
     companion object {
-        val SERVER_ADDRESS = "http://localhost:8080"
+        val SERVER_ADDRESS = "http://192.168.0.10:8080"
     }
 }

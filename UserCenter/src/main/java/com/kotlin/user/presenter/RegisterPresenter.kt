@@ -23,7 +23,7 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
         //回调
         //mView为RegisterView类型（泛型参数）的，所以能够使用RegisterView的方法
 //        val userService = UserServiceImpl()
-        userService.register(mobile,verifyCode,pwd)
+        userService.register(mobile,pwd,verifyCode)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(Schedulers.io())
 //                .subscribe(object :BaseSubscriber<Boolean>(){
