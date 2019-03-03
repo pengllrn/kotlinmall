@@ -23,6 +23,12 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
         //回调
         //mView为RegisterView类型（泛型参数）的，所以能够使用RegisterView的方法
 //        val userService = UserServiceImpl()
+        if (!checkNetwork()){
+            //网络不可用
+            return
+        }
+        mView.showLoading() //在BaseSubscriber中关闭
+
         userService.register(mobile,pwd,verifyCode)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(Schedulers.io())
@@ -31,7 +37,7 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
 //                        mView.onRegisterResult(t)
 //                    }
 //                })
-                .excute(object :BaseSubscriber<Boolean>(){
+                .excute(object :BaseSubscriber<Boolean>(mView){
                     override fun onNext(t: Boolean) {
                         if(t) mView.onRegisterResult("注册成功")
                     }
