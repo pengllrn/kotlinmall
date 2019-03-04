@@ -34,6 +34,9 @@ dependencies {
     //RecyclerView
     api 'com.android.support:recyclerview-v7:27.1.1'
 
+    //Circle imageView
+    api "de.hdodenhof:circleimageview:${circle_imageView_version}"
+
     //Glide
     api "com.github.bumptech.glide:glide:$glide_version"
 
@@ -64,5 +67,11 @@ dependencies {
     //RxLifeCycle
     api "com.trello:rxlifecycle-kotlin:$rx_lifecycle_version"
     api "com.trello:rxlifecycle-components:$rx_lifecycle_version"
+
+    //TakePhoto
+    api "com.jph.takephoto:takephoto_library:${take_photo_version}"
+
+    //AlertView
+    api "com.bigkoo:alertview:${alert_view_version}"
 
 }
