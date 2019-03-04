@@ -1,7 +1,9 @@
 package com.kotlin.user.data.api
 
 import com.kotlin.base.data.protocal.BaseResponse
+import com.kotlin.user.data.protocal.LoginReq
 import com.kotlin.user.data.protocal.RegisterReq
+import com.kotlin.user.data.protocal.UserInfo
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
@@ -16,4 +18,7 @@ import rx.Observable
 interface UserApi {
     @POST("userCenter/register")
     fun register(@Body req:RegisterReq): Observable<BaseResponse<String>>
+
+    @POST("userCenter/login")
+    fun login(@Body req:LoginReq): Observable<BaseResponse<UserInfo>>
 }

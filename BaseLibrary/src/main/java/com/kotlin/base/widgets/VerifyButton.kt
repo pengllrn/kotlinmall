@@ -77,6 +77,14 @@ class VerifyButton(mContext: Context, attrs: AttributeSet) : Button(mContext, at
         fun onClick()
     }
 
+    /**
+     * 使用之前必须通过如下方式进行初始化
+     * mGetVerifyCodeBtn.setOnVerifyBtnClick(object : VerifyButton.OnVerifyBtnClick {
+            override fun onClick() {
+                toast("获取验证码")
+            }
+        })
+     */
     fun setOnVerifyBtnClick(onVerifyBtnClick: OnVerifyBtnClick) {
         this.mOnVerifyBtnClick = onVerifyBtnClick
     }

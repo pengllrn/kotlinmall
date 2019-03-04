@@ -3,8 +3,8 @@ package com.kotlin.base.rx
 /**
  * Author：Pengllrn
  * Date: 2019/2/27
- * Contact 897198177@qq.com
- * https://github.com/pengllrn
+ * 自定义网络异常,主要用于处理网络返回的异常，即status != ResultCode.SUCCESS
+ * @constructor
  */
 class BaseException(val status:Int,val msg:String) :Throwable(){
 }

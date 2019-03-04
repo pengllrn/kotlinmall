@@ -1,7 +1,8 @@
 package com.kotlin.user.ui.activity
 
 import android.os.Bundle
-import com.kotlin.base.common.AppManager
+import android.view.View
+import com.kotlin.base.ext.enable
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.widgets.VerifyButton
 import com.kotlin.user.R
@@ -12,7 +13,9 @@ import com.kotlin.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView {
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView,
+    View.OnClickListener{
+
     override fun injectComponent() {
         DaggerUserComponent.builder()
                 .activityComponent(activityComponent)
@@ -29,14 +32,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-//        mPresenter=RegisterPresenter()
+//        mPresenter=RegisterPresenter()  //自动注入
 
-        mRegisterBtn.setOnClickListener {
-            mPresenter.register(mMobileEt.text.toString(),
-                    mVerifyCodeEt.text.toString(),mPwdEt.text.toString())
+        initView()
+    }
 
-        }
-
+    private fun initView(){
         //mGetVerifyCodeBtn初始化
         mGetVerifyCodeBtn.setOnVerifyBtnClick(object : VerifyButton.OnVerifyBtnClick {
             override fun onClick() {
@@ -44,13 +45,28 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView {
             }
         })
         //mGetVerifyCodeBtn设置点击监听
-        mGetVerifyCodeBtn.setOnClickListener { mGetVerifyCodeBtn.requestSendVerifyNumber() }
+        mGetVerifyCodeBtn.setOnClickListener(this)
+        //mRegisterBtn设置点击监听
+        mRegisterBtn.setOnClickListener(this)
 
-
+        mRegisterBtn.enable({isBtnEnable()},mMobileEt,mVerifyCodeEt,mPwdEt,mPwdConfirmEt)
     }
 
-    override fun onBackPressed() {
-        AppManager.INSTANCE.exitApp(this)
+    override fun onClick(view: View) {
+        when(view.id){
+            R.id.mGetVerifyCodeBtn ->{
+                mGetVerifyCodeBtn.requestSendVerifyNumber()
+            }
+            R.id.mRegisterBtn ->{
+                mPresenter.register(mMobileEt.text.toString(),
+                        mVerifyCodeEt.text.toString(),mPwdEt.text.toString())
+            }
+        }
+    }
+
+    fun isBtnEnable():Boolean{
+        return mMobileEt.text.isNotEmpty() && mVerifyCodeEt.text.isNotEmpty()
+                && mPwdEt.text.isNotEmpty() && mPwdConfirmEt.text.isNotEmpty()
     }
 
 }

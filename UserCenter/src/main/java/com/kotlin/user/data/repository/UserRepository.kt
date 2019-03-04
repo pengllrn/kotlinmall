@@ -3,7 +3,9 @@ package com.kotlin.user.data.repository
 import com.kotlin.base.data.net.RetrofitFactory
 import com.kotlin.base.data.protocal.BaseResponse
 import com.kotlin.user.data.api.UserApi
+import com.kotlin.user.data.protocal.LoginReq
 import com.kotlin.user.data.protocal.RegisterReq
+import com.kotlin.user.data.protocal.UserInfo
 import rx.Observable
 import javax.inject.Inject
 
@@ -18,4 +20,11 @@ class UserRepository @Inject constructor(){
         return RetrofitFactory.instance.create(UserApi::class.java)
                 .register(RegisterReq(mobile,pwd,verifyCode))
     }
+
+    fun login(mobile: String, pwd: String, pushId:String):Observable<BaseResponse<UserInfo>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .login(LoginReq(mobile,pwd,""))
+    }
+
+
 }

@@ -14,7 +14,7 @@ import javax.inject.Inject
 class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
 
     @Inject
-    lateinit var userService:UserServiceImpl
+    lateinit var userService:UserServiceImpl //不能是私有的，错误: Dagger does not support injection into private fields
 
     fun register(mobile:String,verifyCode:String,pwd:String){
         /*
