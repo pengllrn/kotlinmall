@@ -10,5 +10,5 @@ package com.kotlin.user.data.protocal
 /**
  * 注册请求，提供三个参数
  */
-data class RegisterReq(val moblie:String,val pwd:String,val verifyCode:String) {
+data class RegisterReq(val mobile:String,val pwd:String,val verifyCode:String) {
 }

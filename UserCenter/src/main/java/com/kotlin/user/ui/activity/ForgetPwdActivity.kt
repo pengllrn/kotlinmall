@@ -11,6 +11,7 @@ import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.presenter.ForgetPwdPresenter
 import com.kotlin.user.presenter.view.ForgetPwdView
 import kotlinx.android.synthetic.main.activity_forget_pwd.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -45,6 +46,8 @@ class ForgetPwdActivity:BaseMvpActivity<ForgetPwdPresenter>(),ForgetPwdView,View
 
     override fun onForgetPwdResult(result: Boolean) {
         //跳转
+        toast("验证成功")
+        startActivity<ResetPwdActivity>("mobile" to mMobileEt.text.toString())
     }
 
     override fun onClick(view: View) {
@@ -54,7 +57,7 @@ class ForgetPwdActivity:BaseMvpActivity<ForgetPwdPresenter>(),ForgetPwdView,View
             }
 
             R.id.mNextBtn ->{
-                mPresenter.forgetPwd(mMobileEt.text.toString(),mVerifyCodeBtn.text.toString())
+                mPresenter.forgetPwd(mMobileEt.text.toString(),mVerifyCodeEt.text.toString())
             }
         }
     }

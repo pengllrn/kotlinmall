@@ -10,4 +10,4 @@ package com.kotlin.user.data.protocal
 /**
  * 登录的请求实体
  */
-data class LoginReq(val moblie:String, val pwd:String, val pushId:String)
+data class LoginReq(val mobile:String, val pwd:String, val pushId:String)

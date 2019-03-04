@@ -23,7 +23,6 @@ class UserServiceImpl @Inject constructor():UserService{
      */
     override fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean> {
 //        val repository = UserRepository()
-
         //返回值与repository对应方法的返回值有些不一样，需要通过flatMap进行数据转换
         return repository.register(mobile,pwd,verifyCode)
                 .flatMap(BaseFuncBoolean())
@@ -43,5 +42,12 @@ class UserServiceImpl @Inject constructor():UserService{
      */
     override fun forgetPwd(mobile: String, verifyCode: String): Observable<Boolean> {
         return repository.forgetPwd(mobile,verifyCode).flatMap(BaseFuncBoolean())
+    }
+
+    /*
+    重置密码
+     */
+    override fun resetPwd(mobile: String, pwd: String): Observable<Boolean> {
+        return repository.resetPwd(mobile,pwd).flatMap(BaseFuncBoolean())
     }
 }

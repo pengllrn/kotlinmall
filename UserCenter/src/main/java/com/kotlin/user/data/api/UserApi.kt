@@ -1,10 +1,7 @@
 package com.kotlin.user.data.api
 
 import com.kotlin.base.data.protocal.BaseResponse
-import com.kotlin.user.data.protocal.ForgetPwdReq
-import com.kotlin.user.data.protocal.LoginReq
-import com.kotlin.user.data.protocal.RegisterReq
-import com.kotlin.user.data.protocal.UserInfo
+import com.kotlin.user.data.protocal.*
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
@@ -27,6 +24,6 @@ interface UserApi {
     fun forgetpwd(@Body req: ForgetPwdReq):Observable<BaseResponse<String>>
 
     @POST("userCenter/resetPwd")
-    fun resetpwd(@Body req: ForgetPwdReq):Observable<BaseResponse<String>>
+    fun resetpwd(@Body req: ResetPwdReq):Observable<BaseResponse<String>>
 
 }
