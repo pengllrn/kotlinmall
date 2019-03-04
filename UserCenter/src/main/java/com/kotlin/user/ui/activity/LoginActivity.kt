@@ -30,6 +30,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),LoginView,View.OnClickLi
     private fun initView() {
         mLoginBtn.enable({isBtnEnable()},mMobileEt,mPwdEt)
         mLoginBtn.setOnClickListener(this)
+        mForgetPwdTv.setOnClickListener(this)
 
 //        mHeaderBar.mRightTv.setOnClickListener(this) //错误，无法访问到HeaderBar里面的资源
         mHeaderBar.getRightView().setOnClickListener(this)
@@ -59,6 +60,10 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),LoginView,View.OnClickLi
             }
             R.id.mRightTv ->{
                 startActivity<RegisterActivity>()
+            }
+
+            R.id.mForgetPwdTv ->{
+                startActivity<ForgetPwdActivity>()
             }
         }
     }

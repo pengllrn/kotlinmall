@@ -1,6 +1,7 @@
 package com.kotlin.user.data.api
 
 import com.kotlin.base.data.protocal.BaseResponse
+import com.kotlin.user.data.protocal.ForgetPwdReq
 import com.kotlin.user.data.protocal.LoginReq
 import com.kotlin.user.data.protocal.RegisterReq
 import com.kotlin.user.data.protocal.UserInfo
@@ -21,4 +22,11 @@ interface UserApi {
 
     @POST("userCenter/login")
     fun login(@Body req:LoginReq): Observable<BaseResponse<UserInfo>>
+
+    @POST("userCenter/forgetPwd")
+    fun forgetpwd(@Body req: ForgetPwdReq):Observable<BaseResponse<String>>
+
+    @POST("userCenter/resetPwd")
+    fun resetpwd(@Body req: ForgetPwdReq):Observable<BaseResponse<String>>
+
 }

@@ -37,4 +37,11 @@ class UserServiceImpl @Inject constructor():UserService{
         //与数据层对接
         return repository.login(mobile,pwd,pushId).flatMap(BaseFunc())
     }
+
+    /*
+    忘记密码
+     */
+    override fun forgetPwd(mobile: String, verifyCode: String): Observable<Boolean> {
+        return repository.forgetPwd(mobile,verifyCode).flatMap(BaseFuncBoolean())
+    }
 }
