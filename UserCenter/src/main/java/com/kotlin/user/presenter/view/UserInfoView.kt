@@ -1,6 +1,7 @@
 package com.kotlin.user.presenter.view
 
 import com.kotlin.base.presenter.view.BaseView
+import com.kotlin.user.data.protocal.UserInfo
 
 /**
  * Author：pengllrn
@@ -8,5 +9,9 @@ import com.kotlin.base.presenter.view.BaseView
  */
 interface UserInfoView:BaseView {
 
+    //得到凭证
     fun onGetUploadTokenResult(result:String)
+
+    //保存资料成功
+    fun onSaveUserInfo(result: UserInfo)
 }

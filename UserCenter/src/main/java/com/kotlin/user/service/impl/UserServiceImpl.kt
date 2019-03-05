@@ -15,6 +15,7 @@ import javax.inject.Inject
  * https://github.com/pengllrn
  */
 class UserServiceImpl @Inject constructor():UserService{
+
     @Inject
     lateinit var repository: UserRepository
 
@@ -49,5 +50,13 @@ class UserServiceImpl @Inject constructor():UserService{
      */
     override fun resetPwd(mobile: String, pwd: String): Observable<Boolean> {
         return repository.resetPwd(mobile,pwd).flatMap(BaseFuncBoolean())
+    }
+
+    /*
+    保存用户信息
+     */
+    override fun editUser(userIcon: String, userName: String, UserGender: String,
+                          userSign: String): Observable<UserInfo> {
+        return repository.editUser(userIcon,userName,UserGender,userSign).flatMap(BaseFunc())
     }
 }

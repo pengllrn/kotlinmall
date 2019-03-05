@@ -26,14 +26,17 @@ import com.kotlin.base.utils.DateUtils
 import com.kotlin.base.utils.GlideUtils
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.user.R
+import com.kotlin.user.data.protocal.UserInfo
 import com.kotlin.user.injection.component.DaggerUserComponent
 import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.presenter.UserInfoPresenter
 import com.kotlin.user.presenter.view.UserInfoView
+import com.kotlin.user.utils.UserPrefsUtils
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UploadManager
 import kotlinx.android.synthetic.main.activity_user_info.*
+import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.io.File
 
@@ -44,8 +47,6 @@ import java.io.File
  */
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         View.OnClickListener, TakePhoto.TakeResultListener, InvokeListener {
-
-
     private lateinit var mTakePhoto: TakePhoto
 
     //临时文件,拍照的图片临时保存的位置
@@ -83,6 +84,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
     private fun initView() {
         mUserIconIv.setOnClickListener(this)
         mArrowIv.setOnClickListener(this)
+        mHeaderBar.getRightView().setOnClickListener(this)
     }
 
     private fun initData() {
@@ -93,6 +95,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
 
         //显示头像
         if(mUserIcon != ""){
+            mRemoteFilePath = mUserIcon
             GlideUtils.loadUrlImage(this,mUserIcon!!,mUserIconIv)
         }
         //用户名字
@@ -135,6 +138,12 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
                 } else
                     showAlertView()
 
+            }
+
+            R.id.mRightTv ->{
+                mPresenter.saveUser(mRemoteFilePath!!,mUserNameEt.text.toString(),
+                        if (mGenderMaleRb.isChecked) "0" else "1",
+                        mUserSignEt.text.toString())
             }
 
         }
@@ -215,6 +224,13 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
                 GlideUtils.loadImage(this@UserInfoActivity, mRemoteFilePath!!, mUserIconIv)
             }
         }, null)
+    }
+
+    //用户资料服务器保存成功
+    override fun onSaveUserInfo(result: UserInfo) {
+        UserPrefsUtils.putUserInfo(result)
+        toast("修改成功")
+        finish()
     }
 
 }

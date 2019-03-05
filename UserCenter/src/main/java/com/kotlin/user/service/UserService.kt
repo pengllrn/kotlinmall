@@ -18,5 +18,7 @@ interface UserService {
 
     fun resetPwd(mobile: String,pwd: String):Observable<Boolean>
 
+    fun editUser(userIcon:String,userName:String,UserGender:String,
+                 userSign:String):Observable<UserInfo>
 
 }
