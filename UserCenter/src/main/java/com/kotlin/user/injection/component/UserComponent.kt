@@ -2,6 +2,7 @@ package com.kotlin.user.injection.component
 
 import com.kotlin.base.injection.PerComponetScope
 import com.kotlin.base.injection.component.ActivityComponent
+import com.kotlin.user.injection.module.UploadModule
 import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.ui.activity.*
 import dagger.Component
@@ -12,7 +13,7 @@ import dagger.Component
  */
 @PerComponetScope
 @Component(dependencies = arrayOf(ActivityComponent::class),
-        modules = arrayOf(UserModule::class))
+        modules = arrayOf(UserModule::class,UploadModule::class))
 interface UserComponent {
 
     //要注册的地方

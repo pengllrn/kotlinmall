@@ -8,10 +8,12 @@ package com.kotlin.base.common
  */
 class BaseConstant {
     companion object {
-        val SERVER_ADDRESS = "http://192.168.0.10:8080"  //服务器地址
+        const val SERVER_ADDRESS = "http://192.168.0.10:8080"  //服务器地址
 
-        val TABLE_PREFS = "Kotlin_mall"  //SharedPreferences文件名
+        const val TABLE_PREFS = "Kotlin_mall"  //SharedPreferences文件名
 
-        val SERVER_IMAGE_ADDRESS = ""
+        const val SERVER_IMAGE_ADDRESS = "http://pnvvns0bd.bkt.clouddn.com/"  //七牛云服务地址
+
+        const val KEY_SP_TOKEN = "token"
     }
 }
