@@ -2,7 +2,6 @@ package com.kotlin.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.kotlin.base.common.AppManager
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.user.R
@@ -53,7 +52,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),LoginView,View.OnClickLi
     override fun onLoginResult(result: UserInfo) {
         toast("登录成功")
         UserPrefsUtils.putUserInfo(result)//存储用户信息
-        startActivity<UserInfoActivity>()
+        finish()
     }
 
     override fun onClick(view: View) {
@@ -71,7 +70,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),LoginView,View.OnClickLi
         }
     }
 
-    override fun onBackPressed() {
-        AppManager.INSTANCE.exitApp(this)
-    }
+//    override fun onBackPressed() {
+//        AppManager.INSTANCE.exitApp(this)
+//    }
 }

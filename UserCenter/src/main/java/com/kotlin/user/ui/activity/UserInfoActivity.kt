@@ -47,6 +47,14 @@ import java.io.File
  */
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         View.OnClickListener, TakePhoto.TakeResultListener, InvokeListener {
+    override fun invoke(invokeParam: InvokeParam): TPermissionType {
+        val type:TPermissionType= PermissionManager.checkPermission(TContextWrap.of(this),invokeParam.getMethod())
+        if(TPermissionType.WAIT.equals(type)){
+            this.invokeParam=invokeParam
+        }
+        return type
+    }
+
     private lateinit var mTakePhoto: TakePhoto
 
     //临时文件,拍照的图片临时保存的位置
@@ -128,10 +136,10 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
             R.id.mArrowIv, R.id.mUserIconIv -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                            || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(arrayOf(Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                                Manifest.permission.READ_EXTERNAL_STORAGE), 1)
                     } else {
                         showAlertView()
                     }
@@ -183,18 +191,18 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //以下代码为处理Android6.0、7.0动态权限所需
-        val type = PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PermissionManager.handlePermissionsResult(this, type, invokeParam, this)
+        if(requestCode == 1){
+            for((i,permision ) in permissions.withIndex()){
+                if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    toast("需要您授予权限:${permision[i]}")
+                    return
+                }
+            }
+            showAlertView()
+        }
     }
 
-    override fun invoke(invokeParam: InvokeParam): TPermissionType? {
-        val type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam.method)
-        if (TPermissionType.WAIT == type) {
-            this.invokeParam = invokeParam
-        }
-        return type
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

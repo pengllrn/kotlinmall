@@ -11,7 +11,6 @@ import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.presenter.RegisterPresenter
 import com.kotlin.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView,
@@ -28,7 +27,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView,
 
     override fun onRegisterResult(result: String) {
         toast(result)
-        startActivity<LoginActivity>()
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
