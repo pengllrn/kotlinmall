@@ -10,7 +10,7 @@
         <com.kotlin.base.widgets.RoundRectImageView
                 android:id="@+id/mTopicIv"
                 android:layout_width="200.0dip"
-                android:layout_height="120.0dip"
+                android:layout_height="100.0dip"
                 android:scaleType="centerCrop"/>
         <TextView android:textColor="@color/text_light_dark"
                   style="@style/WrapWrap"
