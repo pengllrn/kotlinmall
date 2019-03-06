@@ -75,11 +75,20 @@ dependencies {
     api "com.bigkoo:alertview:${alert_view_version}"
 
     //七牛
-    api "com.qiniu:qiniu-android-sdk:7.3.+"
+    api 'com.qiniu:qiniu-android-sdk:7.3.+'
 
     //底部导航
     api 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
 
     //Banner
     api 'com.youth.banner:banner:1.4.10'
+
+    //三角形标签
+    api 'com.github.shts:TriangleLabelView:1.1.2'
+
+    //画廊
+    api 'com.github.crosswall:Android-Coverflow:release-v1.0.5'
+
+    //CardView
+    api 'com.android.support:cardview-v7:27.1.1'
 }

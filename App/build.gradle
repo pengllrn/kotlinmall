@@ -37,4 +37,5 @@ dependencies {
     if (isUserModule.toBoolean()) {
         api project(':UserCenter')
     }
+    api project(':MessageCenter')
 }
